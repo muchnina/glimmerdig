@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1e1a4d" />
+    <link rel="icon" href="/glimmerdig/icons/favicon-64.png" />
+    <title>Glimmerdig Level Editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/glimmerdig/assets/editor-AiVVA7Zp.js"></script>
+    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-Rg2hOZ_P.js">
+    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/editor-CsaK9wMR.css">
+  <link rel="manifest" href="/glimmerdig/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/glimmerdig/registerSW.js"></script></head>
+  <body>
+    <header class="ed-top">
+      <a href="../" class="ed-brand" title="Back to the game"><img src="/glimmerdig/icons/favicon-64.png" alt="" width="32" height="32" /><b>Glimmerdig</b><span>Level editor</span></a>
+      <div class="ed-actions">
+        <select id="ed-open" aria-label="Open a level">
+          <option value="">Open…</option>
+          <option value="new">New empty level</option>
+        </select>
+        <button id="ed-undo" title="Undo (Ctrl+Z)">Undo</button>
+        <span class="sep"></span>
+        <button id="ed-solve" class="accent" title="Search for a winning route">Solve</button>
+        <button id="ed-play" class="primary" title="Play this level in a new tab">Playtest</button>
+        <span class="sep"></span>
+        <button id="ed-copy">Copy text</button>
+        <button id="ed-download">Download .txt</button>
+        <label class="btn">Import .txt<input type="file" id="ed-file" accept=".txt,text/plain" hidden /></label>
+      </div>
+    </header>
+
+    <aside class="ed-side">
+      <section>
+        <h2>Level</h2>
+        <label>Id <input id="f-id" spellcheck="false" /></label>
+        <label>Name <input id="f-name" /></label>
+        <label>World
+          <select id="f-world"></select>
+        </label>
+        <div class="row">
+          <label>Quota <input id="f-quota" type="number" min="0" placeholder="all" /></label>
+          <label>Par (s) <input id="f-par" type="number" min="1" placeholder="auto" /></label>
+        </div>
+        <label>Lumi’s intro <input id="f-intro" placeholder="Ooh, what’s this?" /></label>
+        <label class="check"><input id="f-gravity" type="checkbox" /> Starts upside down (things fall up)</label>
+      </section>
+      <section>
+        <h2>Size</h2>
+        <div class="row">
+          <label>Width <input id="f-w" type="number" min="4" max="60" /></label>
+          <label>Height <input id="f-h" type="number" min="4" max="40" /></label>
+        </div>
+      </section>
+      <section>
+        <h2>Tiles</h2>
+        <div id="palette"></div>
+        <p class="hint">Click or drag to paint · right-click erases · type a tile’s letter to pick it · Ctrl+Z undoes</p>
+      </section>
+    </aside>
+
+    <main id="board" aria-label="Level grid"></main>
+
+    <aside class="ed-text">
+      <div id="ed-status" class="ed-status" role="status" aria-live="polite"></div>
+      <div id="ed-checks" class="ed-checks"></div>
+      <label class="grow">Level text <span class="hint">(edit here too; it’s the same level)</span>
+        <textarea id="ed-textarea" spellcheck="false" wrap="off"></textarea>
+      </label>
+      <details>
+        <summary>Solver options</summary>
+        <label>Start the search after these moves
+          <input id="f-prefix" spellcheck="false" placeholder="e.g. RRRDDLL" />
+        </label>
+        <p class="hint">Helps when a level needs a long setup before the first Glimmer. U D L R move, u d l r reach, P plants, . waits.</p>
+      </details>
+      <p id="ed-hover" class="hint"></p>
+    </aside>
+
+  </body>
+</html>

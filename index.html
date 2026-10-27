@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#1e1a4d" />
+    <link rel="icon" href="/glimmerdig/icons/favicon-64.png" />
+    <link rel="apple-touch-icon" href="/glimmerdig/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Glimmerdig</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/glimmerdig/assets/main-CrCl2n-G.js"></script>
+    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-Rg2hOZ_P.js">
+    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/main-v0xYa2Fc.css">
+  <link rel="manifest" href="/glimmerdig/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/glimmerdig/registerSW.js"></script></head>
+  <body data-world="meadow">
+    <div class="sky" aria-hidden="true"></div>
+
+    <header class="hud">
+      <div class="hud-group">
+        <button id="btn-map" class="icon" aria-label="World map"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="2"/></svg></button>
+        <button id="btn-prev" class="icon" aria-label="Previous level">‹</button>
+        <div class="level">
+          <span id="lvl-num" class="pill">1/8</span>
+          <span id="lvl-name"></span>
+        </div>
+        <button id="btn-next" class="icon" aria-label="Next level">›</button>
+      </div>
+      <div id="glimmers" class="glimmers" aria-label="Glimmers collected">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 2l2.9 6.2 6.8.8-5 4.6 1.3 6.7L12 17l-6 3.3 1.3-6.7-5-4.6 6.8-.8z" fill="#FFD36A" stroke="#F2A93B" stroke-width="1"/></svg>
+        <span id="glim-count">0 / 0</span>
+      </div>
+      <div class="hud-group">
+        <span id="timer" class="timer">0:00</span>
+        <button id="btn-seed" class="chip seed" aria-label="Plant a Firework Seed" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><ellipse cx="12" cy="14.5" rx="6" ry="7.5" fill="#F4A6C8" stroke="#C4558A"/><path d="M14 7.5c0-2.5 1.5-4 4-4" fill="none" stroke="#5AA36B" stroke-width="2" stroke-linecap="round"/></svg> <span id="seed-count">0</span></button>
+        <button id="btn-undo" class="chip" aria-label="Undo (Z)">↶ <span id="undo-count">3</span></button>
+        <button id="btn-restart" class="chip" aria-label="Restart (R)">⟲</button>
+        <button id="btn-pause" class="chip" aria-label="Pause (Esc)"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"/></svg></button>
+      </div>
+    </header>
+
+    <main id="stage"></main>
+
+    <div id="touch" class="touch" hidden>
+      <div id="dpad" class="dpad" role="group" aria-label="Move Lumi">
+        <span class="dp up"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(0deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
+        <span class="dp right"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(90deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
+        <span class="dp down"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(180deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
+        <span class="dp left"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(270deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
+      </div>
+      <div class="touch-actions">
+        <button id="t-seed" class="t-btn seed" hidden aria-label="Plant a Firework Seed"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><ellipse cx="12" cy="14.5" rx="6" ry="7.5" fill="#F4A6C8" stroke="#C4558A"/><path d="M14 7.5c0-2.5 1.5-4 4-4" fill="none" stroke="#5AA36B" stroke-width="2" stroke-linecap="round"/></svg><span>Seed</span></button>
+        <button id="t-reach" class="t-btn" aria-pressed="false" aria-label="Reach: dig or collect without moving"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-4.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L4.2 14.6a1.6 1.6 0 0 1 2.6-1.8L8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reach</span></button>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <img class="toast-face" src="/glimmerdig/assets/brand/lumi/lumi-face-neutral.png" alt="" width="30" height="30" />
+      <span id="toast-text"></span>
+    </div>
+
+    <div id="card" class="card-overlay" role="dialog" aria-modal="true" aria-labelledby="card-title">
+      <div class="card">
+        <img id="card-art" alt="" />
+        <h2 id="card-title"></h2>
+        <p id="card-body"></p>
+        <div id="card-extra" class="card-extra"></div>
+        <div id="card-actions" class="card-actions"></div>
+        <div id="card-toggles" class="card-toggles"></div>
+      </div>
+    </div>
+
+    <section id="title" class="title-screen" hidden aria-label="Glimmerdig title screen">
+      <div class="leaves" aria-hidden="true">
+        <i style="--x: 6%; --d: 13s; --delay: -2s; --s: 1"></i>
+        <i style="--x: 18%; --d: 17s; --delay: -9s; --s: 0.7"></i>
+        <i style="--x: 31%; --d: 12s; --delay: -5s; --s: 0.9"></i>
+        <i style="--x: 44%; --d: 19s; --delay: -14s; --s: 0.6"></i>
+        <i style="--x: 57%; --d: 14s; --delay: -1s; --s: 1.1"></i>
+        <i style="--x: 69%; --d: 16s; --delay: -11s; --s: 0.8"></i>
+        <i style="--x: 81%; --d: 13s; --delay: -6s; --s: 1"></i>
+        <i style="--x: 92%; --d: 18s; --delay: -3s; --s: 0.7"></i>
+      </div>
+      <div class="title-inner">
+        <img class="hero" src="/glimmerdig/assets/brand/lumi/lumi-title.webp" alt="Lumi flying through autumn leaves, waving hello" />
+        <h1 class="logo">Glimmerdig</h1>
+        <p class="tagline">Dig through dream-mazes with Lumi</p>
+        <div class="title-actions">
+          <button id="title-play" class="primary big">Play</button>
+          <button id="title-daily" class="ghost daily-btn"></button>
+        </div>
+        <div id="title-toggles" class="card-toggles"></div>
+      </div>
+    </section>
+
+    <section id="map" class="map-screen" hidden aria-label="World map">
+      <div class="map-scroll">
+        <header class="map-head">
+          <button id="map-back" class="icon" aria-label="Back to title">‹</button>
+          <img class="map-lumi" src="/glimmerdig/assets/brand/lumi/lumi-report.webp" alt="" />
+          <div class="map-title">
+            <h2>Explorer’s Journal</h2>
+            <p id="map-total"></p>
+          </div>
+        </header>
+        <div id="map-daily" class="daily-card"></div>
+        <div id="map-worlds"></div>
+      </div>
+    </section>
+
+    <div id="splash" class="splash" aria-label="Loading">
+      <div class="splash-art"></div>
+      <div class="splash-ui">
+        <h1 class="logo">Glimmerdig</h1>
+        <div class="bar"><i id="splash-bar"></i></div>
+        <p>Gathering Glimmers…</p>
+      </div>
+    </div>
+
+    <footer class="keys">Arrows / WASD move · Space + arrow to reach · hold Space to plant a seed · Z undo · R restart · Esc pause</footer>
+  </body>
+</html>
