@@ -11,9 +11,9 @@
     <title>Glimmerdig</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/glimmerdig/assets/main-CobpAIia.js"></script>
-    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-Dcl_69os.js">
-    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/main-CpNeXsc7.css">
+    <script type="module" crossorigin src="/glimmerdig/assets/main-DvBYMITI.js"></script>
+    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-D-_7AYL7.js">
+    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/main-CIFgNvtb.css">
   <link rel="manifest" href="/glimmerdig/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/glimmerdig/registerSW.js"></script></head>
   <body data-world="meadow">
     <div class="sky" aria-hidden="true"></div>
@@ -37,6 +37,7 @@
         <button id="btn-seed" class="chip seed" aria-label="Plant a Firework Seed" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><ellipse cx="12" cy="14.5" rx="6" ry="7.5" fill="#F4A6C8" stroke="#C4558A"/><path d="M14 7.5c0-2.5 1.5-4 4-4" fill="none" stroke="#5AA36B" stroke-width="2" stroke-linecap="round"/></svg> <span id="seed-count">0</span></button>
         <button id="btn-undo" class="chip" aria-label="Undo (Z)">↶ <span id="undo-count">3</span></button>
         <button id="btn-restart" class="chip" aria-label="Restart (R)">⟲</button>
+        <button id="btn-zoom" class="chip" aria-label="Zoom in on Lumi" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path class="zoom-plus" d="M10.5 7.5v6M7.5 10.5h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
         <button id="btn-pause" class="chip" aria-label="Pause (Esc)"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"/></svg></button>
       </div>
     </header>
@@ -54,6 +55,13 @@
         <button id="t-seed" class="t-btn seed" hidden aria-label="Plant a Firework Seed"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><ellipse cx="12" cy="14.5" rx="6" ry="7.5" fill="#F4A6C8" stroke="#C4558A"/><path d="M14 7.5c0-2.5 1.5-4 4-4" fill="none" stroke="#5AA36B" stroke-width="2" stroke-linecap="round"/></svg><span>Seed</span></button>
         <button id="t-reach" class="t-btn" aria-pressed="false" aria-label="Reach: dig or collect without moving"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-4.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L4.2 14.6a1.6 1.6 0 0 1 2.6-1.8L8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reach</span></button>
       </div>
+    </div>
+
+    <div id="rotate" class="rotate" hidden role="dialog" aria-labelledby="rotate-title">
+      <div class="rotate-phone" aria-hidden="true"><img src="/glimmerdig/assets/brand/lumi/lumi-face-wink.png" alt="" width="56" height="56" /></div>
+      <h2 id="rotate-title">Turn your phone sideways</h2>
+      <p>Glimmerdig plays best in landscape: bigger tiles, with the controls either side.</p>
+      <button id="rotate-dismiss" class="ghost">Keep playing upright</button>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite">
