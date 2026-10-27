@@ -11,9 +11,9 @@
     <title>Glimmerdig</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/glimmerdig/assets/main-DvBYMITI.js"></script>
-    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-D-_7AYL7.js">
-    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/main-CIFgNvtb.css">
+    <script type="module" crossorigin src="/glimmerdig/assets/main-DdnnW3mh.js"></script>
+    <link rel="modulepreload" crossorigin href="/glimmerdig/assets/replay-POwMdT2E.js">
+    <link rel="stylesheet" crossorigin href="/glimmerdig/assets/main-C3beBraV.css">
   <link rel="manifest" href="/glimmerdig/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/glimmerdig/registerSW.js"></script></head>
   <body data-world="meadow">
     <div class="sky" aria-hidden="true"></div>
@@ -44,24 +44,10 @@
 
     <main id="stage"></main>
 
-    <div id="touch" class="touch" hidden>
-      <div id="dpad" class="dpad" role="group" aria-label="Move Lumi">
-        <span class="dp up"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(0deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
-        <span class="dp right"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(90deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
-        <span class="dp down"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(180deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
-        <span class="dp left"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="transform: rotate(270deg)"><path d="M12 5l7 9H5z" fill="currentColor"/></svg></span>
-      </div>
-      <div class="touch-actions">
-        <button id="t-seed" class="t-btn seed" hidden aria-label="Plant a Firework Seed"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><ellipse cx="12" cy="14.5" rx="6" ry="7.5" fill="#F4A6C8" stroke="#C4558A"/><path d="M14 7.5c0-2.5 1.5-4 4-4" fill="none" stroke="#5AA36B" stroke-width="2" stroke-linecap="round"/></svg><span>Seed</span></button>
-        <button id="t-reach" class="t-btn" aria-pressed="false" aria-label="Reach: dig or collect without moving"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-6.5V4a1.5 1.5 0 0 1 3 0v7m0-5.5a1.5 1.5 0 0 1 3 0V12m0-4.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L4.2 14.6a1.6 1.6 0 0 1 2.6-1.8L8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reach</span></button>
-      </div>
-    </div>
-
     <div id="rotate" class="rotate" hidden role="dialog" aria-labelledby="rotate-title">
       <div class="rotate-phone" aria-hidden="true"><img src="/glimmerdig/assets/brand/lumi/lumi-face-wink.png" alt="" width="56" height="56" /></div>
       <h2 id="rotate-title">Turn your phone sideways</h2>
-      <p>Glimmerdig plays best in landscape: bigger tiles, with the controls either side.</p>
-      <button id="rotate-dismiss" class="ghost">Keep playing upright</button>
+      <p>Glimmerdig is played in landscape, with the whole board in view.</p>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite">
@@ -111,6 +97,7 @@
 
     <section id="map" class="map-screen" hidden aria-label="World map">
       <div class="map-scroll">
+        <div class="map-side">
         <header class="map-head">
           <button id="map-back" class="icon" aria-label="Back to title">‹</button>
           <img class="map-lumi" src="/glimmerdig/assets/brand/lumi/lumi-report.webp" alt="" />
@@ -120,6 +107,7 @@
           </div>
         </header>
         <div id="map-daily" class="daily-card"></div>
+        </div>
         <div id="map-worlds"></div>
       </div>
     </section>
